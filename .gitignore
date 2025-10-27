@@ -25,3 +25,7 @@ target/
 .vscode/
 .idea/
 *.DS_Store
+# Airflow specific ignores
+airflow/.env
+airflow/logs/
+airflow/plugins/

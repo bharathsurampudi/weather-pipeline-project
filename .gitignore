@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+
+# Airflow / Docker (add more specific ones later if needed)
+logs/
+plugins/ # If you don't commit custom plugins
+# Add specific DB data dirs if needed e.g. pg_data/
+
+# dbt
+dbt_packages/
+target/
+
+# IDE / OS files
+.vscode/
+.idea/
+*.DS_Store

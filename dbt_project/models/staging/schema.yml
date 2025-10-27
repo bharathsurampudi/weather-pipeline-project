@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: weather_raw_source 
+    schema: public 
+    tables:
+      - name: raw_weather 
+        description: "Raw weather data loaded from JSON files, one row per API call."
+        columns:
+          - name: data 
+            description: "The raw JSON payload from the OpenWeatherMap API call."
+          - name: loaded_at
+            description: "Timestamp when the data was loaded into the table."
+
+models: # Add this section
+  - name: stg_weather_data # The name of your staging model file (without .sql)
+    description: "Cleaned and parsed weather data extracted from raw JSON source."
+    columns:
+      - name: city_id
+        description: "Unique identifier for the city."
+        tests:
+          - not_null
+          - unique # Assuming each API call is unique for a city at a time
+      - name: observation_ts
+        description: "Timestamp of the weather observation."
+        tests:
+          - not_null
+      - name: temperature_celsius
+        description: "Temperature in degrees Celsius."
+        tests:
+          - not_null
+          # Add reasonable range checks if desired, e.g., dbt_utils.accepted_range
+          # tests:
+          #   - dbt_utils.accepted_range:
+          #       min_value: -70
+          #       max_value: 70
